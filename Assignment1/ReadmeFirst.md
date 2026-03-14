@@ -38,18 +38,18 @@ This Python program simulates **a single neuron** using a **threshold activation
 
 ---
 
-Enter number of inputs: 3
-Enter input x1: 1
-Enter input x2: 0
-Enter input x3: 1
-Enter weight w1: 0.5
-Enter weight w2: -0.6
-Enter weight w3: 0.8
-Enter bias: -0.1
-
 ## Example Usage
-Weighted Sum = 1.2
-Neuron Output = 1
+- Enter number of inputs: 3
+- Enter input x1: 1
+- Enter input x2: 0
+- Enter input x3: 1
+- Enter weight w1: 0.5
+- Enter weight w2: -0.6
+- Enter weight w3: 0.8
+- Enter bias: -0.1
+---
+- Weighted Sum = 1.2
+- Neuron Output = 1
 
 
 ---
