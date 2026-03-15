@@ -1,59 +1,72 @@
-# Write a python program to train AND Gate Using Perceptron Learning Algorithm.
-# Perceptron Learning Algorithm to Train AND Gate
-
-# Training data for AND gate
-training_inputs = [
-    [0, 0],
-    [0, 1],
-    [1, 0],
-    [1, 1]
+# Training data (inputs + expected output)
+training_data = [
+([0,0],0),
+([0,1],0),
+([1,0],0),
+([1,1],1)
 ]
 
-# Expected outputs for AND gate
-expected_outputs = [0, 0, 0, 1]
-
 # Initialize weights and bias
-weights = [0, 0]  # one weight for each input
+weights = [0,0]
 bias = 0
-learning_rate = 1  # step size for updates
+learning_rate = 1
 
-# Activation function (threshold)
+# Activation function
 def activation(z):
-    return 1 if z >= 0 else 0
+    if z >= 0:
+        return 1
+    else:
+        return 0
+
+
+epoch = 0
 
 # Training loop
-epoch = 0
 while True:
+
     epoch += 1
-    print(f"\nEpoch {epoch}")
-    error_count = 0  # count how many predictions are wrong in this epoch
-    
-    for inputs, expected in zip(training_inputs, expected_outputs):
-        # Compute weighted sum
-        z = sum(w*x for w, x in zip(weights, inputs)) + bias
-        
-        # Compute predicted output
+    print("\nEpoch",epoch)
+
+    error_count = 0
+
+    for inputs, expected in training_data:
+
+        # Calculate weighted sum
+        z = weights[0]*inputs[0] + weights[1]*inputs[1] + bias
+
+        # Predicted output
         output = activation(z)
-        
-        # Compute error
+
+        # Error calculation
         error = expected - output
-        
-        # Update weights and bias if prediction is wrong
+
+        # Update weights if wrong
         if error != 0:
-            weights = [w + learning_rate * error * x for w, x in zip(weights, inputs)]
-            bias += learning_rate * error
+
+            weights[0] = weights[0] + learning_rate*error*inputs[0]
+            weights[1] = weights[1] + learning_rate*error*inputs[1]
+
+            bias = bias + learning_rate*error
+
             error_count += 1
-        
-        print(f"Inputs: {inputs}, Weighted sum: {z}, Output: {output}, Weights: {weights}, Bias: {bias}")
-    
-    # Stop training if all outputs are correct
+
+        print("Inputs:",inputs,
+              "Z:",z,
+              "Output:",output,
+              "Weights:",weights,
+              "Bias:",bias)
+
     if error_count == 0:
-        print("\nTraining complete!")
+        print("\nTraining Complete")
         break
 
+
 # Testing the trained perceptron
-print("\nTesting AND Gate Perceptron:")
-for inputs in training_inputs:
-    z = sum(w*x for w, x in zip(weights, inputs)) + bias
+print("\nTesting AND Gate")
+
+for inputs, expected in training_data:
+
+    z = weights[0]*inputs[0] + weights[1]*inputs[1] + bias
     output = activation(z)
-    print(f"Input: {inputs}, Output: {output}")
+
+    print("Input:",inputs,"Output:",output)
